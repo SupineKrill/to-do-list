@@ -14,7 +14,7 @@ def SavePickle(to_do_list):
 def RemoveIndex(to_do_list):
     for list_num in range(0,len(to_do_list)):
         print("{}. {}".format(list_num,to_do_list[list_num]))
-    input_number = input("Enter the number to delete or Exit to leave.")
+    input_number = input("Enter the number to delete or Exit to leave.\n")
     if input_number == "Exit":
         return to_do_list
     elif int(input_number) > len(to_do_list):
@@ -44,10 +44,15 @@ def main():
             to_do_list.append(input("Please enter to do: \n"))
             SavePickle(to_do_list)
         elif prompt == "Remove":
-            to_do_list = RemoveIndex(to_do_list)
-            SavePickle(to_do_list)
+            if my_file.is_file():
+                to_do_list = RemoveIndex(to_do_list)
+                SavePickle(to_do_list)
+            else:
+                print("No data in file.")
         elif prompt == "Exit":
             exit_time = True
+        else:
+            print("Request not understood. Please try again.")
 
 
 if __name__=="__main__":
